@@ -178,10 +178,14 @@ zend_class_entry* registerPinClass(void) {
   classEntry->ce_flags |= ZEND_ACC_FINAL | ZEND_ACC_NO_DYNAMIC_PROPERTIES;
   /* intercept object creation to change object handlers */
   classEntry->create_object = pinCreateObject;
-  /* disable serialization */
-  classEntry->serialize = zend_class_serialize_deny;
-  /* disable unserialization */
-  classEntry->unserialize = zend_class_unserialize_deny;
+
+  /* disable serialization/unserialization */
+  #ifdef ZEND_ACC_NOT_SERIALIZABLE
+    classEntry->ce_flags |= ZEND_ACC_NOT_SERIALIZABLE;
+  #else
+    classEntry->serialize = zend_class_serialize_deny;
+    classEntry->unserialize = zend_class_unserialize_deny;
+  #endif
 
   /* Class Constants */
   zend_declare_class_constant_long(classEntry, "BIAS_DISABLED", sizeof("BIAS_DISABLED") - 1, BIAS_DISABLED);
