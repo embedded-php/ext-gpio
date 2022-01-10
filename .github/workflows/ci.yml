@@ -1,0 +1,36 @@
+name: CI
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  run:
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        # arch: ["armv6", "armv7", "aarch64", "amd64"]
+        php: ["8.0", "8.1", "8.2"]
+        type: ["ts", "nts"]
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php }}
+        coverage: none
+        extensions: none
+        tools: none
+      env:
+        phpts: ${{ matrix.type }}
+        update: true
+
+    - name: Prepare for build
+      run: phpize && ./configure
+
+    - name: Build ext-gpio
+      run: make
+
+    - name: Run test suite
+      run: make test
+      env:
+        NO_INTERACTION: 1
