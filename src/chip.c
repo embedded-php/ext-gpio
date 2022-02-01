@@ -348,13 +348,13 @@ PHP_METHOD(GPIO_Chip, getPins) {
   ZEND_HASH_FOREACH_VAL(offsetsHashTable, entry) {
     long value = zval_get_long(entry);
     if (value < 0) {
-      zend_throw_exception_ex(zceException, EINVAL, "Invalid offset value, cannot be negative (%d)", value);
+      zend_throw_exception_ex(zceException, EINVAL, "Invalid offset value, cannot be negative (%ld)", value);
 
       RETURN_THROWS();
     }
 
     if (value >= self->pinCount) {
-      zend_throw_exception_ex(zceException, EINVAL, "Invalid offset value, cannot be greater than the number of pins (%d)", value);
+      zend_throw_exception_ex(zceException, EINVAL, "Invalid offset value, cannot be greater than the number of pins (%ld)", value);
 
       RETURN_THROWS();
     }
