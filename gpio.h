@@ -20,11 +20,11 @@
   extern zend_module_entry gpio_module_entry;
   #define phpext_gpio_ptr &gpio_module_entry
 
-  #define PHP_GPIO_EXTNAME   "phpgpio"
+  #define PHP_GPIO_EXTNAME   "gpio"
   #define PHP_GPIO_VERSION   "0.0.1-dev"
   #define PHP_GPIO_AUTHOR    "flavioheleno"
-  #define PHP_GPIO_URL       "https://github.com/flavioheleno/phpgpio"
-  #define PHP_GPIO_COPYRIGHT "Copyright (c) 2021"
+  #define PHP_GPIO_URL       "https://github.com/embedded-php/ext-gpio"
+  #define PHP_GPIO_COPYRIGHT "Copyright (c) 2021-2022"
 
   #if defined(ZTS) && defined(COMPILE_DL_GPIO)
     ZEND_TSRMLS_CACHE_EXTERN()
