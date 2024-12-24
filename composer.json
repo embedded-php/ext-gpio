@@ -1,0 +1,12 @@
+{
+  "name": "embedded-php/gpio",
+  "type": "php-ext",
+  "license": "mit",
+  "description": "An object-oriented wrapper to the gpio Linux Userspace ABI",
+  "require": {
+    "php": "^8.0"
+  },
+  "php-ext": {
+    "extension-name": "gpio"
+  }
+}
